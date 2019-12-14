@@ -6,19 +6,19 @@
     <content><![CDATA[<h4 id="使用自己的语料训练word2vec模型"><a href="#使用自己的语料训练word2vec模型" class="headerlink" title="使用自己的语料训练word2vec模型"></a><strong>使用自己的语料训练word2vec模型</strong></h4><h5 id="一、准备环境和语料："><a href="#一、准备环境和语料：" class="headerlink" title="一、准备环境和语料："></a>一、准备环境和语料：</h5><p>新闻20w+篇（格式：<code>标题</code>。<code>正文</code>） </p>
 <p>【新闻可以自己从各大新闻网站爬取，也可以下载开源的新闻数据集，如 </p>
 <ul>
-<li><p><a href="http://www.sogou.com/labs/resource/t.php" target="_blank" rel="noopener">互联网语料库(SogouT)</a></p>
+<li><p><span class="exturl" data-url="aHR0cDovL3d3dy5zb2dvdS5jb20vbGFicy9yZXNvdXJjZS90LnBocA==" title="http://www.sogou.com/labs/resource/t.php">互联网语料库(SogouT)<i class="fa fa-external-link"></i></span></p>
 </li>
-<li><p><a href="http://thuctc.thunlp.org/" target="_blank" rel="noopener">中文文本分类数据集THUCNews</a></p>
+<li><p><span class="exturl" data-url="aHR0cDovL3RodWN0Yy50aHVubHAub3JnLw==" title="http://thuctc.thunlp.org/">中文文本分类数据集THUCNews<i class="fa fa-external-link"></i></span></p>
 </li>
-<li><p><a href="http://www.datatang.com/data/11968" target="_blank" rel="noopener">李荣陆英文文本分类语料</a></p>
+<li><p><span class="exturl" data-url="aHR0cDovL3d3dy5kYXRhdGFuZy5jb20vZGF0YS8xMTk2OA==" title="http://www.datatang.com/data/11968">李荣陆英文文本分类语料<i class="fa fa-external-link"></i></span></p>
 </li>
-<li><p><a href="http://www.datatang.com/data/11970" target="_blank" rel="noopener">谭松波中文文本分类语料</a></p>
+<li><p><span class="exturl" data-url="aHR0cDovL3d3dy5kYXRhdGFuZy5jb20vZGF0YS8xMTk3MA==" title="http://www.datatang.com/data/11970">谭松波中文文本分类语料<i class="fa fa-external-link"></i></span></p>
 </li>
 <li><p>等</p>
 </li>
-<li><p><a href="https://github.com/fxsjy/jieba" target="_blank" rel="noopener">结巴分词</a> </p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2Z4c2p5L2ppZWJh" title="https://github.com/fxsjy/jieba">结巴分词<i class="fa fa-external-link"></i></span> </p>
 </li>
-<li><p><a href="https://radimrehurek.com/gensim/models/word2vec.html" target="_blank" rel="noopener">word2vec</a></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9yYWRpbXJlaHVyZWsuY29tL2dlbnNpbS9tb2RlbHMvd29yZDJ2ZWMuaHRtbA==" title="https://radimrehurek.com/gensim/models/word2vec.html">word2vec<i class="fa fa-external-link"></i></span></p>
 </li>
 </ul>
 <h5 id="二、分词"><a href="#二、分词" class="headerlink" title="二、分词"></a>二、分词</h5><p>先对新闻文本进行分词，使用的是结巴分词工具，将分词后的文本保存在<code>seg201708.txt</code>，以备后期使用。</p>
