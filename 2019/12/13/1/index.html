@@ -56,7 +56,7 @@
 <meta property="og:description" content="如果在以词为基本单元输入的自然语言处理任务中，都避免不了使用词的表示，词的表示有很多种，这里使用的是词向量，word2vec是目前比较通用的训练词向量的工具，使用Gensim模块，可以使词向量的训练变得简单，word2vec常见的两种模型 (CBOW和Skip-Gram) 他们的输入以及输出都是以单词为基本单位的，只是他们对应的输入以及输出不一样：   Skip-Gram models：输入为单个">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-12-13T02:03:37.000Z">
-<meta property="article:modified_time" content="2019-12-15T11:38:54.020Z">
+<meta property="article:modified_time" content="2019-12-17T12:57:49.606Z">
 <meta property="article:author" content="NinetyOne">
 <meta property="article:tag" content="自然语言">
 <meta name="twitter:card" content="summary">
@@ -247,7 +247,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-15 19:38:54" itemprop="dateModified" datetime="2019-12-15T19:38:54+08:00">2019-12-15</time>
+                <time title="修改时间：2019-12-17 20:57:49" itemprop="dateModified" datetime="2019-12-17T20:57:49+08:00">2019-12-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -280,6 +280,8 @@
 <p>从上面可以看出，无论是Skip-Gram models还是CBOW models基本的单元都是词，那么我们获取到的语料，必须要经过分词处理以后才能用于词向量的训练语料。 </p>
 </li>
 </ol>
+<a id="more"></a>
+
 <h5 id="1-数据的处理"><a href="#1-数据的处理" class="headerlink" title="1.数据的处理"></a>1.数据的处理</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> jieba.analyse</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> codecs</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">#以写的方式打开原始的简体中文语料库</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">f=codecs.open(<span class="string">'zhwiki_jian_zh.txt'</span>,<span class="string">'r'</span>,encoding=<span class="string">"utf8"</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">#将分完词的语料写入到wiki_jian_zh_seg-189.5.txt文件中</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">target = codecs.open(<span class="string">"wiki_jian_zh_seg-189.5.txt"</span>, <span class="string">'w'</span>,encoding=<span class="string">"utf8"</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">print(<span class="string">'open files'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">line_num=<span class="number">1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">line = f.readline()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">#循环遍历每一行，并对这一行进行分词操作</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="comment">#如果下一行没有内容的话，就会readline会返回-1，则while -1就会跳出循环</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> line:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    print(<span class="string">'---- processing '</span>, line_num, <span class="string">' article----------------'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    line_seg = <span class="string">" "</span>.join(jieba.cut(line))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    target.writelines(line_seg)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    line_num = line_num + <span class="number">1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    line = f.readline()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="comment">#关闭两个文件流，并退出程序</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">f.close()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">target.close()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">exit()</span></pre></td></tr></table></figure>
 
 <h5 id="2-训练模型"><a href="#2-训练模型" class="headerlink" title="2.训练模型"></a>2.训练模型</h5><p>有了分好词的语料，我们就可以通过Gensim模块中的word2vec函数来训练语料</p>
@@ -343,7 +345,7 @@
   <p><span>本文标题:</span><a href="/2019/12/13/1/">使用Gensim模块训练词向量(维基百科预料)</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 NinetyOne 的个人博客">NinetyOne</a></p>
   <p><span>发布时间:</span>2019年12月13日 - 10:03</p>
-  <p><span>最后更新:</span>2019年12月15日 - 19:38</p>
+  <p><span>最后更新:</span>2019年12月17日 - 20:57</p>
   <p><span>原始链接:</span><a href="/2019/12/13/1/" title="使用Gensim模块训练词向量(维基百科预料)">http://xujiuyi.xyz/2019/12/13/1/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://xujiuyi.xyz/2019/12/13/1/"  aria-label="复制成功！"></i></span>
   </p>
@@ -393,7 +395,10 @@
     <a href="/2019/12/12/1/" rel="prev" title="使用自己的语料训练word2vec模型">
       <i class="fa fa-chevron-left"></i> 使用自己的语料训练word2vec模型
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/17/1/" rel="next" title="jieba分词笔记">
+      jieba分词笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -470,7 +475,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -483,7 +488,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
